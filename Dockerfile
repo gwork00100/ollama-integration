@@ -1,4 +1,3 @@
-# Use an official base image that supports Ollama (Ubuntu + Ollama install)
 FROM ubuntu:22.04
 
 # Install dependencies
@@ -10,5 +9,8 @@ RUN curl -fsSL https://ollama.com/install.sh | sh
 # Expose the Ollama API port
 EXPOSE 11434
 
-# Run Ollama server, bound to 0.0.0.0 so Render can access it
-CMD ["ollama", "serve", "--host", "0.0.0.0"]
+# Set environment variable to bind Ollama to 0.0.0.0
+ENV OLLAMA_HOST=0.0.0.0:11434
+
+# Start the Ollama server
+CMD ["ollama", "serve"]
