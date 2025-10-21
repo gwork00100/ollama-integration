@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -y curl gpg sudo
 # Install Ollama
 RUN curl -fsSL https://ollama.com/install.sh | sh
 
-# Expose port (Ollama defaults to 11434)
+# Expose the Ollama API port
 EXPOSE 11434
 
-# Run Ollama server
-CMD ["ollama", "serve"]
+# Run Ollama server, bound to 0.0.0.0 so Render can access it
+CMD ["ollama", "serve", "--host", "0.0.0.0"]
